@@ -4,7 +4,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     List<User> getListUser();
@@ -20,7 +19,6 @@ public interface UserService {
 
     User getUser(long id);
 
-    User findUserByUsername(String name);
+    Object getAuthCurrentUser();
 
-    Optional<User> findUserByUsernameValidate(String name);
 }

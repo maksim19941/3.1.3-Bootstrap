@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import java.security.Principal;
+
 
 @Controller
 public class UserController {
@@ -20,6 +22,7 @@ public class UserController {
 
     @GetMapping("/userInfo")
     public String showUserInfo(Model model) {
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("currentUser", user);
         return "showUserInfo";

@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,7 +46,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         userRepository.save(updateUser);
     }
 
-
     @Transactional
     public void delete(long id) {
         userRepository.deleteById(id);
@@ -54,15 +55,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
     public User getUser(long id) {
         return userRepository.getById(id);
 
-    }
-
-    public User findUserByUsername(String name) {
-        return userRepository.findByUsername(name).orElse(null);
-    }
-
-
-    public Optional<User> findUserByUsernameValidate(String name) {
-        return userRepository.findByUsername(name);
     }
 
     @Override
@@ -75,4 +67,13 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return userOptional.get();
 
     }
+
+    @Override
+    public User getAuthCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+        return user;
+    }
+
+
 }

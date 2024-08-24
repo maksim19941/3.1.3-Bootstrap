@@ -61,9 +61,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
-            <span class="navbar-text me-3 text-light" th:text="${currentUser.getEmail() + ' wich roles:'}">EMAIL</span>
-            <span class="navbar-text me-2 text-light" th:each="role : ${currentUser.getRoles()}"
-                  th:text="${#strings.substring(role.getName(), 5)}"></span>
+            <span class="navbar-text me-3 text-light" th:text="${currentUser.email + ' wich roles:'}">EMAIL</span>
+            <span class="navbar-text me-2 text-light" th:each="role : ${currentUser.roles}"
+                  th:text="${#strings.substring(role.name, 5)}"></span>
         </div>
         <div class="navbar-nav ml-auto">
             <a class="btn btn-dark" href="/logout">Logout</a>
